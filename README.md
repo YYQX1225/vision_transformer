@@ -23,9 +23,49 @@ for pre-training a ViT, or
 [configs/transfer.py](https://github.com/google-research/big_vision/blob/main/big_vision/configs/transfer.py)
 for transfering a model).
 
+## Mortar Rheology Prediction
+
+🆕 **NEW**: This repository now includes a Vision Transformer-based model for predicting rheological properties (Yield Stress and Plastic Viscosity) of mortar from 9-frame image sequences during the mixing process.
+
+### Quick Start
+
+```bash
+# Create demo data
+python demo_mortar.py
+
+# Train model
+python -m vit_jax.main_mortar \
+    --config=vit_jax/configs/mortar_config.py \
+    --workdir=/tmp/mortar_vit \
+    --sequence_dir=Sequence5 \
+    --csv_file=List5.csv
+
+# Evaluate
+python -m vit_jax.inference_mortar \
+    --checkpoint_dir=/tmp/mortar_vit \
+    --sequence_dir=Sequence5 \
+    --csv_file=List5.csv \
+    --split=test \
+    --output_file=predictions.csv
+```
+
+### Features
+- 9-frame temporal sequence processing
+- 70/15/15 train/val/test split
+- Cyclic shift augmentation for training
+- Regression output for YS and PV values
+- Three model sizes (small/base/large)
+
+### Documentation
+- [English Documentation](MORTAR_README.md)
+- [中文快速开始指南](MORTAR_QUICKSTART_CN.md)
+- [Implementation Summary](IMPLEMENTATION_SUMMARY.md)
+- [实现总结](IMPLEMENTATION_SUMMARY_CN.md)
+
 Table of contents:
 
 - [Vision Transformer and MLP-Mixer Architectures](#vision-transformer-and-mlp-mixer-architectures)
+	- [Mortar Rheology Prediction](#mortar-rheology-prediction) 🆕
 	- [Colab](#colab)
 	- [Installation](#installation)
 	- [Fine-tuning a model](#fine-tuning-a-model)
