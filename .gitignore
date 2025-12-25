@@ -3,3 +3,9 @@ __pycache__/
 /.vscode
 /.env
 vit_jax.egg-info
+
+# Mortar prediction data and outputs
+Sequence5/
+List5.csv
+predictions.csv
+/tmp/
